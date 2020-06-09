@@ -5,11 +5,16 @@ export default class List extends Lightning.Component {
     static _template() {
         return {
             Label: {
-                text: {text: '', fontFace: 'Magra'}
+                // text: {text: '', fontFace: 'Magra'}
+                y: -10,
+                text: {text: '', fontFace: 'SourceSansPro-Bold', fontSize: 60}
             },
             Movies: {
-                y: 75
+                y: 75,
                 // Here will be all the items
+                transitions: {
+                    x: { duration: 0.5, timingFunction: 'ease' }
+                } 
             },
             Levels: {
 
@@ -31,7 +36,7 @@ export default class List extends Lightning.Component {
     _handleLeft() {
         // @todo: update index and call setIndex
         if (this._index > 0) {
-            this._index++;
+            this._index--;
             this.setIndex(this._index);
         }
     }
@@ -39,10 +44,9 @@ export default class List extends Lightning.Component {
     _handleRight() {
         // @todo: update index and call setIndex
 
-        // Why _maxItems = 0?
-        if (this._index < this._maxItems) {
-            this._index--;
-            this.setIndex(this.index);
+        if (this._index < this._moviesContent.length - 1) {
+            this._index++;
+            this.setIndex(this._index);
         }
     }
 
@@ -53,15 +57,11 @@ export default class List extends Lightning.Component {
          * that stores index and position movie component to focus
          * on selected item
          */
+        // We move the list
         this._movies.patch({
-            x: 250 * index
+            x: - ((1920 * index)/ this._moviesContent.length)
         });
 
-    }
-
-    set maxItems(c) {
-        // Why this setter is not working?
-        this._maxItems = c;
     }
 
     set label(v) {
@@ -71,6 +71,9 @@ export default class List extends Lightning.Component {
 
     set movies(v) {
         // we add an array of object with type: Item
+
+        this._moviesContent = v;
+
         this._movies.children = v.map((element, index) => {
             return {
                 // ...element,
@@ -80,10 +83,6 @@ export default class List extends Lightning.Component {
                 x: index * 250 //250 pixels separation? who knows 
             }
         });
-
-        this.maxItems = this._movies.children.length; // Why after setting here is not available for other methods of the object?
-                                                       // it's because the data from an async?
-        console.log(this._maxItems) // Why here _maxItems = 20?
     }
 
     get items() {

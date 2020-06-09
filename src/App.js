@@ -32,13 +32,13 @@ export default class App extends Lightning.Component {
             Splash:{
                type: Splash,
             },
-            Main: {
-                visible: false,
-                type: Main,
-                signals: {
-                    hideSplash: true
-                }
-            },
+            // Main: {
+            //     visible: false,
+            //     type: Main,
+            //     signals: {
+            //         hideSplash: true
+            //     }
+            // },
             Widgets: {
                 Menu:{
                     // @todo; this is an extra assignment,
@@ -60,18 +60,18 @@ export default class App extends Lightning.Component {
         // call
     }
 
-    _getFocused(){
-        // Set the focus to the splash
-        return this.tag("Splash");
-    }
+    // _getFocused(){
+    //     // Set the focus to the splash
+    //     return this.tag("Splash");
+    // }
 
-    _handleLeft(){
-        this.setIndex(this.index - 1);
-    }
+    // _handleLeft(){
+    //     this.setIndex(this.index - 1);
+    // }
 
     $hideSplashScreen(v) {
         if (!!v === true) {
-            this._setState('MainMenuIsHere');
+            this._setState('ShowPages');
         }
     }
 
@@ -103,9 +103,8 @@ export default class App extends Lightning.Component {
                     return this._widget;
                 }
             },
-            class MainMenuIsHere extends this {
+            class ShowPages extends this {
                 $enter(event) {
-                    this.tag('Menu').visible = true;
                     this.tag('Splash').patch({
                         smooth: {
                             alpha: 0
@@ -113,10 +112,6 @@ export default class App extends Lightning.Component {
                     })
                 }
                 $exit(event) {
-                    this.tag('Menu').visible = false;
-                }
-                _getFocused() {
-                    return this.tag('Main');
                 }
             }
         ];

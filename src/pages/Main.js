@@ -50,10 +50,11 @@ export default class Main extends Lightning.Component{
         // let's populate hardcoded
         // TODO: TO BE DEFINED WHAT IS LABEL
         this._list.label = 'Popular';
-        // Put the result
-        this._list.movies = values.results;
 
-        this._list.maxItems = values.results.length;
+        this._list.patch({
+            movies: values.results
+        })
+
 
         // And set one background color
         // TODO: TO BE DEFINED

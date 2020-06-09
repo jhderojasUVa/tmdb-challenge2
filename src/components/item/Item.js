@@ -5,12 +5,20 @@ import {Lightning, Utils} from "wpe-lightning-sdk";
 export default class Level extends Lightning.Component {
     static _template(){
         return {
+            mountX: 150,
             Image: {
                 src: ''
             },
             Title: {
-                y: 310, x: 20,
-                text: {fontFace: "Magra", fontSize: 24}
+                // y: 310, x: 20,
+                y: 350,
+                x: 20,
+                w: 230,
+                h: 100,
+                rect: true,
+                color: 0xCCffffff,
+                // text: {fontFace: "Magra", fontSize: 24}
+                text: {fontFace: "SourceSansPro-Regular", fontSize: 24}
             }
         }
     }
@@ -28,7 +36,8 @@ export default class Level extends Lightning.Component {
      _focus() {
          this.patch({
              smooth: {
-                 alpha: [0.5, { duration: 0.2, timingFunction: 'ease-in'}]
+                 alpha: [0.5, { duration: 0.2, timingFunction: 'ease-in'}],
+                 scale: [1.1, { duration: 0.2, timingFunction: 'ease-in' }]
              }
          })
      }
@@ -36,7 +45,8 @@ export default class Level extends Lightning.Component {
      _unfocus() {
         this.patch({
             smooth: {
-                alpha: [1, { duration: 0.2, timingFunction: 'ease-out'}]
+                alpha: [1, { duration: 0.2, timingFunction: 'ease-out'}],
+                scale: [1, { duration: 0.2, timingFunction: 'ease-out'}]
             }
         })
      }
