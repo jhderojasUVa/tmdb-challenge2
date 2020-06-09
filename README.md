@@ -8,7 +8,7 @@ npm install -g WebPlatformForEmbedded/Lightning-CLI
 ```
 
 ## Result so far
-![a video](https://github.com/jhderojasUVa/tmdb-challenge2/tree/master/static/Day2.mov)
+link to the video (https://github.com/jhderojasUVa/tmdb-challenge2/tree/master/static/Day2.mov)
 
 #### Running the App
 
