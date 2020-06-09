@@ -72,6 +72,10 @@ export default class Splash extends Lightning.Component{
          */
     }
 
+    _handleEnter() {
+        Router.navigate('movies')
+    }
+
     _active() {
         this._spinnerAnimation.start()
     }

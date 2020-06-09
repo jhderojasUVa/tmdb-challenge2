@@ -1,4 +1,4 @@
-import {Lightning} from 'wpe-lightning-sdk';
+import {Lightning, Utils} from 'wpe-lightning-sdk';
 import {List} from "../components"
 
 export default class Main extends Lightning.Component{
@@ -6,18 +6,25 @@ export default class Main extends Lightning.Component{
         return {
             scale:0.5,
             Lists: {
-                x: 100, y: 560, zIndex: 3
+                x: 100, y: 560, zIndex: 3,
+                type: List
             },
             // @todo: add logo
+            Logo: {
+                x: 0,
+                y: 0,
+                src: Utils.asset('images/logo.png')
+            }
         };
     }
 
     _init() {
         this._index = 0; 
+        this._list = this.tag('Lists');
     }
 
     _focus() {
-
+        this.signal('hideSplash', true);
     }
 
     /**
@@ -26,12 +33,19 @@ export default class Main extends Lightning.Component{
      * and hand over the movies
      */
 
+    set movies(values) {
+
+        this._list.label = 'Popular';
+        this._list.movies = values.results;
+    }
+
     _unfocus() {
         // @todo
     }
 
     _getFocused() {
         // @todo: delegate focus to List child
+        return this._list;
     }
 
 }

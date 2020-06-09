@@ -2,7 +2,8 @@ import { Lightning, Utils, Router } from 'wpe-lightning-sdk';
 import provider from "./lib/data-provider";
 import routes from "./lib/routes";
 import {init as initApi} from "./lib/Api"
-import {Splash} from "./pages";
+import {Splash, Main} from "./pages";
+
 
 export default class App extends Lightning.Component {
 
@@ -29,7 +30,14 @@ export default class App extends Lightning.Component {
                 forceZIndexContext: true, w: 1000
             },
             Splash:{
-               type: Splash
+               type: Splash,
+            },
+            Main: {
+                visible: false,
+                type: Main,
+                signals: {
+                    hideSplash: '_hideSplash'
+                }
             },
             Widgets: {
                 Menu:{
@@ -53,11 +61,18 @@ export default class App extends Lightning.Component {
     }
 
     _getFocused(){
-        return this.tag("Splash")
+        return this.tag("Splash");
     }
 
     _handleLeft(){
         this.setIndex(this.index - 1);
+    }
+
+    _hideSplash(v) {
+        console.log('THE METHOG MAN THE METHOD')
+        if (!!v === true) {
+            this._setState()
+        }
     }
 
      static _states() {
@@ -86,6 +101,18 @@ export default class App extends Lightning.Component {
                     // we delegate focus to selected widget
                     // so it can consume remotecontrol presses
                     return this._widget;
+                }
+            },
+            class MainMenuIsHere extends this {
+                $enter(event) {
+                    console.log('FIRE ENTER HERE MAN STUYPID')
+                    this.tag('Menu').visible = true;
+                }
+                $exit(event) {
+                    this.tag('Menu').visible = false;
+                }
+                _getFocused() {
+                    return this.tag('Main');
                 }
             }
         ];
