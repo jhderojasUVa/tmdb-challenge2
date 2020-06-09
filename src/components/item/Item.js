@@ -16,7 +16,6 @@ export default class Level extends Lightning.Component{
     _init() {
         this._image = this.tag('Image');
         this._title = this.tag('Title');
-        console.log(this);
     }
 
     /**
