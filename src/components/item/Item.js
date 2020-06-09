@@ -1,10 +1,12 @@
 import {Lightning, Utils} from "wpe-lightning-sdk";
 
-export default class Level extends Lightning.Component{
+// LEVEL? ITEM?
+// We need to have an example of an Item in order to create the correct layout!
+export default class Level extends Lightning.Component {
     static _template(){
         return {
             Image: {
-
+                src: ''
             },
             Title: {
                 y: 310, x: 20,
@@ -23,15 +25,39 @@ export default class Level extends Lightning.Component{
      * - toggle alpha on focus / unfocus (transition)
      */
 
-    // set item(v){
-    //     // @todo: patch the correct image and title
-    // }
+     _focus() {
+         this.patch({
+             smooth: {
+                 alpha: [0.5, { duration: 0.2, timingFunction: 'ease-in'}]
+             }
+         })
+     }
 
-    set poster_path(v) {
-        this._image.src = 'https://image.tmdb.org/t/p/w220_and_h330_face' + v;
-    }
+     _unfocus() {
+        this.patch({
+            smooth: {
+                alpha: [1, { duration: 0.2, timingFunction: 'ease-out'}]
+            }
+        })
+     }
 
-    set title(v) {
-        this._title.text = v;
+    set item(v){
+        // @todo: patch the correct image and title
+        
+        // Because we don't know the correct URL we use that (that must be wrong)
+        const url = 'https://image.tmdb.org/t/p/w220_and_h330_face';
+
+        // Patch the image
+        this.tag('Image').patch({
+            src: url + v.poster_path
+        });
+        // Patch the title 
+        this.tag('Title').patch({
+            text: {
+                text: v.title
+            }
+        });
+
+        // this.x = this.index
     }
 }

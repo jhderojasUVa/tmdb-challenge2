@@ -36,7 +36,7 @@ export default class App extends Lightning.Component {
                 visible: false,
                 type: Main,
                 signals: {
-                    hideSplash: '_hideSplash'
+                    hideSplash: true
                 }
             },
             Widgets: {
@@ -61,6 +61,7 @@ export default class App extends Lightning.Component {
     }
 
     _getFocused(){
+        // Set the focus to the splash
         return this.tag("Splash");
     }
 
@@ -68,10 +69,9 @@ export default class App extends Lightning.Component {
         this.setIndex(this.index - 1);
     }
 
-    _hideSplash(v) {
-        console.log('THE METHOG MAN THE METHOD')
+    $hideSplashScreen(v) {
         if (!!v === true) {
-            this._setState()
+            this._setState('MainMenuIsHere');
         }
     }
 
@@ -105,8 +105,12 @@ export default class App extends Lightning.Component {
             },
             class MainMenuIsHere extends this {
                 $enter(event) {
-                    console.log('FIRE ENTER HERE MAN STUYPID')
                     this.tag('Menu').visible = true;
+                    this.tag('Splash').patch({
+                        smooth: {
+                            alpha: 0
+                        }
+                    })
                 }
                 $exit(event) {
                     this.tag('Menu').visible = false;

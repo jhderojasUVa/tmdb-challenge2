@@ -73,7 +73,9 @@ export default class Splash extends Lightning.Component{
     }
 
     _handleEnter() {
-        Router.navigate('movies')
+        Router.navigate('movies');
+        // Call ancestor to hide splash screen
+        this.fireAncestors('$hideSplashScreen', true);
     }
 
     _active() {

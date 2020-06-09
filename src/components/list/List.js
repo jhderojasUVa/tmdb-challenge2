@@ -17,6 +17,10 @@ export default class List extends Lightning.Component {
         }
     }
 
+    _build() {
+        this._maxItems = 0;
+    }
+
     _init() {
         this._index = 0;
         this._label = this.tag('Label');
@@ -26,12 +30,20 @@ export default class List extends Lightning.Component {
 
     _handleLeft() {
         // @todo: update index and call setIndex
-        this._index = (this._index-- < 0) ? 0 : this._index--;
+        if (this._index > 0) {
+            this._index++;
+            this.setIndex(this._index);
+        }
     }
 
     _handleRight() {
         // @todo: update index and call setIndex
-        this._index = (this._index++ > this._movies.children.lenght - 1) ? (this._movies.children.lenght - 1) : this._index++; 
+
+        // Why _maxItems = 0?
+        if (this._index < this._maxItems) {
+            this._index--;
+            this.setIndex(this.index);
+        }
     }
 
     setIndex(index) {
@@ -41,7 +53,15 @@ export default class List extends Lightning.Component {
          * that stores index and position movie component to focus
          * on selected item
          */
+        this._movies.patch({
+            x: 250 * index
+        });
 
+    }
+
+    set maxItems(c) {
+        // Why this setter is not working?
+        this._maxItems = c;
     }
 
     set label(v) {
@@ -53,22 +73,22 @@ export default class List extends Lightning.Component {
         // we add an array of object with type: Item
         this._movies.children = v.map((element, index) => {
             return {
-                ...element,
+                // ...element,
+                item: element,
                 index,
-                type: Item
+                type: Item,
+                x: index * 250 //250 pixels separation? who knows 
             }
         });
 
-        this._levels.children = v.map((element, index) => {
-            return {
-                ...element,
-                index,
-            }
-        });
+        this.maxItems = this._movies.children.length; // Why after setting here is not available for other methods of the object?
+                                                       // it's because the data from an async?
+        console.log(this._maxItems) // Why here _maxItems = 20?
     }
 
     get items() {
-        return this.tag("Levels").children;
+        // return this.tag("Levels").children;
+        return this.tag('Movies').children;
     }
 
     get activeItem() {
@@ -79,6 +99,6 @@ export default class List extends Lightning.Component {
     _getFocused() {
         // @todo:
         // return activeItem
-        return this._movies.children[this._index];
+        return this.activeItem;
     }
 }
