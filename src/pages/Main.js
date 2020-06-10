@@ -6,14 +6,26 @@ export default class Main extends Lightning.Component{
         return {
             Background: {
                 alpha: 0.5,
+                w: 750,
+                h: 1080,
+                y: 0,
+                x: 1200,
                 transition: {
                     alpha: {
                         duration: 0.2,
                         timingFunction: 'ease'
                     }
+                },
+                shader: {
+                    type: Lightning.shaders.RadialGradient,
+                    x: 10,
+                    y: 540,
+                    color: 0x00ffffff,
+                    radiusY: 6000,
+                    radiusX: 700,
                 }
             },
-            scale: 0.5,
+            // scale: 0.5,
             Lists: {
                 x: 100, y: 560, zIndex: 3,
                 type: List
@@ -56,16 +68,14 @@ export default class Main extends Lightning.Component{
             movies: values.results
         })
 
-        // And set one background screen
+        // And set one background screen (first screen)
         // TODO: TO BE DEFINED
         this._background.patch({
             src: 'https://image.tmdb.org/t/p/w220_and_h330_face' + values.results[0].poster_path,
-            w: 1920 * 2,
-            h: 1080 * 5,
-            y: -1080,
-            shader: {
-                type: Lightning.shaders.BoxBlur,
-            }
+            w: 750,
+            h: 1080,
+            y: 0,
+            x: 1200
         });
     }
 
@@ -82,12 +92,6 @@ export default class Main extends Lightning.Component{
     // Responsible for changing the background
     this._background.patch({
         src: 'https://image.tmdb.org/t/p/w220_and_h330_face' + movie.poster_path,
-        w: 1920 * 2,
-        h: 1080 * 5,
-        y: -1080,
-        shader: {
-            type: Lightning.shaders.BoxBlur,
-        }
     });
    }
 }

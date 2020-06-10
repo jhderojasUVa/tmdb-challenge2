@@ -59,7 +59,7 @@ export default class List extends Lightning.Component {
          */
         // We move the list
         this._movies.patch({
-            x: - ((1920 * index)/ this._moviesContent.length)
+            x: - (((1920 * 2) * index)/ this._moviesContent.length)
         });
 
         // Maybe is so up...

@@ -9,23 +9,38 @@ export default class Level extends Lightning.Component {
             Image: {
                 src: ''
             },
+            
             Title: {
                 // y: 310, x: 20,
-                y: 350,
+                y: 200,
                 x: 20,
                 w: 230,
                 h: 100,
-                rect: true,
-                color: 0xCCffffff,
-                // text: {fontFace: "Magra", fontSize: 24}
-                text: {fontFace: "SourceSansPro-Regular", fontSize: 24}
+                Box: {
+                    x: -20, 
+                    w: 250, 
+                    h: 150, 
+                    rect: true,
+                    color: 0xCC000000,
+                    rect: true,
+                },
+                Text: {
+                    color: 0xFFffffff,
+                    y: 10,
+                    w: 220,
+                    h: 150,
+                    text: {fontFace: "SourceSansPro-Regular", fontSize: 32, maxLines: 3, textOverflow: '...'}
+                }
             }
         }
     }
 
-    _init() {
+    _build() {
         this._image = this.tag('Image');
-        this._title = this.tag('Title');
+        this._title = this.tag('Text');
+    }
+
+    _init() {
     }
 
     /**
@@ -58,16 +73,15 @@ export default class Level extends Lightning.Component {
         const url = 'https://image.tmdb.org/t/p/w220_and_h330_face';
 
         // Patch the image
-        this.tag('Image').patch({
+        this._image.patch({
             src: url + v.poster_path
         });
+
         // Patch the title 
-        this.tag('Title').patch({
+        this._title.patch({
             text: {
                 text: v.title
             }
         });
-
-        // this.x = this.index
     }
 }

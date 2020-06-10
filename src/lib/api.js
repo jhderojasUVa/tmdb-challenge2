@@ -13,9 +13,9 @@ export const init = (stageInstance) =>{
  * and return the data
  */
 export const getMovies = async()=> {
-    // First get the token
-
+    // Set the URL
     const url = 'https://api.themoviedb.org/3/movie/popular?api_key=' + apiKey
+    // Get the data
     return get(url);
 };
 
