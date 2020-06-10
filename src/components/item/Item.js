@@ -5,11 +5,9 @@ import {Lightning, Utils} from "wpe-lightning-sdk";
 export default class Level extends Lightning.Component {
     static _template(){
         return {
-            mountX: 150,
             Image: {
                 src: ''
             },
-            
             Title: {
                 // y: 310, x: 20,
                 y: 200,
@@ -27,8 +25,8 @@ export default class Level extends Lightning.Component {
                 Text: {
                     color: 0xFFffffff,
                     y: 10,
-                    w: 220,
-                    h: 150,
+                    w: 210,
+                    h: 1500,
                     text: {fontFace: "SourceSansPro-Regular", fontSize: 32, maxLines: 3, textOverflow: '...'}
                 }
             }
@@ -51,7 +49,7 @@ export default class Level extends Lightning.Component {
      _focus() {
          this.patch({
              smooth: {
-                 alpha: [0.5, { duration: 0.2, timingFunction: 'ease-in'}],
+                 alpha: [0.7, { duration: 0.2, timingFunction: 'ease-in'}],
                  scale: [1.1, { duration: 0.2, timingFunction: 'ease-in' }]
              }
          })
@@ -77,6 +75,7 @@ export default class Level extends Lightning.Component {
             src: url + v.poster_path
         });
 
+        console.log(v.title)
         // Patch the title 
         this._title.patch({
             text: {
