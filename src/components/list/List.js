@@ -6,7 +6,7 @@ export default class List extends Lightning.Component {
         return {
             Label: {
                 // text: {text: '', fontFace: 'Magra'}
-                y: -10,
+                y: -50,
                 text: {text: '', fontFace: 'SourceSansPro-Bold', fontSize: 60}
             },
             Movies: {
