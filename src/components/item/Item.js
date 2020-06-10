@@ -5,6 +5,7 @@ import {Lightning, Utils} from "wpe-lightning-sdk";
 export default class Level extends Lightning.Component {
     static _template(){
         return {
+            alpha: 0.5,
             Image: {
                 rtt: true,
                 shader: {
@@ -24,11 +25,15 @@ export default class Level extends Lightning.Component {
                 h: 100,
                 Box: {
                     x: -20, 
-                    w: 250, 
-                    h: 150, 
+                    w: 220, 
+                    h: 130, 
                     rect: true,
                     color: 0xCC000000,
-                    rect: true,
+                    rtt: true,
+                    shader: {
+                        type: Lightning.shaders.RoundedRectangle,
+                        radius: 15,
+                    },
                 },
                 Text: {
                     color: 0xFFffffff,
@@ -57,22 +62,16 @@ export default class Level extends Lightning.Component {
      _focus() {
          this.patch({
              smooth: {
-                 alpha: [0.7, { duration: 0.2, timingFunction: 'ease-in'}],
+                 alpha: [1, { duration: 0.2, timingFunction: 'ease-in'}],
                  scale: [1.1, { duration: 0.2, timingFunction: 'ease-in' }]
              }
          });
-        //  this.children.add({
-        //      color: 0xFFFFFF,
-        //      w: 1000,
-        //      h: 200,
-        //      rect: true
-        //  })
      }
 
      _unfocus() {
         this.patch({
             smooth: {
-                alpha: [1, { duration: 0.2, timingFunction: 'ease-out'}],
+                alpha: [0.5, { duration: 0.2, timingFunction: 'ease-out'}],
                 scale: [1, { duration: 0.2, timingFunction: 'ease-out'}]
             }
         })
