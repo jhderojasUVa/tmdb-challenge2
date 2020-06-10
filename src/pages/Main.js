@@ -31,6 +31,7 @@ export default class Main extends Lightning.Component{
         
         this._index = 0; 
         this._list = this.tag('Lists');
+        this._background = this.tag('Background');
     }
 
     _focus() {
@@ -55,11 +56,10 @@ export default class Main extends Lightning.Component{
             movies: values.results
         })
 
-
-        // And set one background color
+        // And set one background screen
         // TODO: TO BE DEFINED
-        this.tag('Background').patch({
-            src: 'https://image.tmdb.org/t/p/w220_and_h330_face' + values.results[this._index].poster_path,
+        this._background.patch({
+            src: 'https://image.tmdb.org/t/p/w220_and_h330_face' + values.results[0].poster_path,
             w: 1920 * 2,
             h: 1080 * 5,
             y: -1080,
@@ -78,4 +78,16 @@ export default class Main extends Lightning.Component{
         return this._list;
     }
 
+   $changeBackground(movie) {
+    // Responsible for changing the background
+    this._background.patch({
+        src: 'https://image.tmdb.org/t/p/w220_and_h330_face' + movie.poster_path,
+        w: 1920 * 2,
+        h: 1080 * 5,
+        y: -1080,
+        shader: {
+            type: Lightning.shaders.BoxBlur,
+        }
+    });
+   }
 }

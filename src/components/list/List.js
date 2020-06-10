@@ -62,6 +62,8 @@ export default class List extends Lightning.Component {
             x: - ((1920 * index)/ this._moviesContent.length)
         });
 
+        // Maybe is so up...
+        this.fireAncestors('$changeBackground', this._moviesContent[index]);
     }
 
     set label(v) {
