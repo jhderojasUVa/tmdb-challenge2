@@ -6,7 +6,15 @@ export default class Level extends Lightning.Component {
     static _template(){
         return {
             Image: {
-                src: ''
+                rtt: true,
+                shader: {
+                    type: Lightning.shaders.RoundedRectangle,
+                    radius: 15,
+                },
+                src: '',
+            },
+            Genre: {
+                text: '' //string
             },
             Title: {
                 // y: 310, x: 20,
@@ -28,8 +36,8 @@ export default class Level extends Lightning.Component {
                     w: 210,
                     h: 1500,
                     text: {fontFace: "SourceSansPro-Regular", fontSize: 32, maxLines: 3, textOverflow: '...'}
-                }
-            }
+                },
+            },
         }
     }
 
@@ -52,7 +60,13 @@ export default class Level extends Lightning.Component {
                  alpha: [0.7, { duration: 0.2, timingFunction: 'ease-in'}],
                  scale: [1.1, { duration: 0.2, timingFunction: 'ease-in' }]
              }
-         })
+         });
+        //  this.children.add({
+        //      color: 0xFFFFFF,
+        //      w: 1000,
+        //      h: 200,
+        //      rect: true
+        //  })
      }
 
      _unfocus() {
@@ -75,7 +89,6 @@ export default class Level extends Lightning.Component {
             src: url + v.poster_path
         });
 
-        console.log(v.title)
         // Patch the title 
         this._title.patch({
             text: {
