@@ -6,8 +6,16 @@ export default class List extends Lightning.Component {
         return {
             Label: {
                 // text: {text: '', fontFace: 'Magra'}
-                y: -40,
+                y: -60,
                 text: {text: '', fontFace: 'SourceSansPro-Bold', fontSize: 60}
+            },
+            Genre: {
+                y: -20,
+                text: {
+                    text: '',
+                    fontFace: 'SourceSansPro-Regular', 
+                    fontSize: 22
+                }
             },
             Movies: {
                 y: 75,
@@ -31,6 +39,7 @@ export default class List extends Lightning.Component {
         this._label = this.tag('Label');
         this._movies = this.tag('Movies');
         this._levels = this.tag('Levels');
+        this._genre = this.tag('Genre');
     }
 
     _handleLeft() {
@@ -103,5 +112,11 @@ export default class List extends Lightning.Component {
         // @todo:
         // return activeItem
         return this.activeItem;
+    }
+
+    $changeGenre(genre) {
+        this._genre.patch({
+            text: genre
+        })
     }
 }

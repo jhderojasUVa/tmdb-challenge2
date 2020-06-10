@@ -25,6 +25,20 @@ export default class Main extends Lightning.Component{
                     radiusX: 700,
                 }
             },
+            Information: {
+                x: 100,
+                y: 250,
+                Text: {
+                    alpha: 0.3,
+                    w: 850,
+                    h: 400,
+                    text: {
+                        maxLines: 4, 
+                        textOverflow: '...',
+                        text: ''
+                    }
+                }
+            },
             // scale: 0.5,
             Lists: {
                 x: 100, y: 560, zIndex: 3,
@@ -44,6 +58,7 @@ export default class Main extends Lightning.Component{
         this._index = 0; 
         this._list = this.tag('Lists');
         this._background = this.tag('Background');
+        this._information = this.tag('Information');
     }
 
     _focus() {
@@ -77,6 +92,7 @@ export default class Main extends Lightning.Component{
             y: 0,
             x: 1200
         });
+        this._information.tag('Text').text.text = values.results[0].overview;
     }
 
     _unfocus() {
@@ -93,5 +109,7 @@ export default class Main extends Lightning.Component{
     this._background.patch({
         src: 'https://image.tmdb.org/t/p/w220_and_h330_face' + movie.poster_path,
     });
+
+    this._information.tag('Text').text.text = movie.overview;
    }
 }
